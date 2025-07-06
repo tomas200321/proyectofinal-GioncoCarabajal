@@ -8,7 +8,6 @@ const checkoutSection = document.getElementById('checkout');
 const formCompra = document.getElementById('formularioCompra');
 
 const MAX_CANTIDAD_POR_SKIN = 5;
-
 let carrito = [];
 
 // Inputs del formulario
@@ -16,10 +15,9 @@ const nombreInput = document.getElementById('nombre');
 const emailInput = document.getElementById('email');
 const steamUserInput = document.getElementById('steamUser');
 const metodoPagoInput = document.getElementById('metodoPago');
-
 const inputs = [nombreInput, emailInput, steamUserInput, metodoPagoInput];
 
-// -------------------- FUNCIONES DE FORMULARIO --------------------
+// -------------------- FORMULARIO --------------------
 
 function precargarFormulario() {
   if (!localStorage.getItem('nombre')) nombreInput.value = 'Juan Pérez';
@@ -28,14 +26,11 @@ function precargarFormulario() {
   if (!localStorage.getItem('metodoPago')) metodoPagoInput.value = 'tarjeta';
 
   inputs.forEach(input => {
-    const valorGuardado = localStorage.getItem(input.id);
-    if (valorGuardado) {
-      input.value = valorGuardado;
-    }
+    const valor = localStorage.getItem(input.id);
+    if (valor) input.value = valor;
   });
 }
 
-// Guardar en localStorage cada vez que el usuario cambia un input
 inputs.forEach(input => {
   input.addEventListener('input', () => {
     localStorage.setItem(input.id, input.value);
@@ -47,6 +42,7 @@ inputs.forEach(input => {
 function agregarAlCarrito(index) {
   const skin = skins[index];
   const existente = carrito.find(item => item.nombre === skin.nombre);
+
   if (existente) {
     if (existente.cantidad < MAX_CANTIDAD_POR_SKIN) {
       existente.cantidad++;
@@ -57,6 +53,7 @@ function agregarAlCarrito(index) {
   } else {
     carrito.push({ ...skin, cantidad: 1 });
   }
+
   guardarCarrito();
   actualizarCarrito();
 }
@@ -78,6 +75,12 @@ function actualizarCarrito() {
   });
 
   totalSpan.textContent = total;
+
+  const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  if (totalItems === 0 && !checkoutSection.classList.contains('oculto')) {
+    checkoutSection.classList.add('oculto');
+    Swal.fire('El carrito se vació', 'Se canceló el proceso de compra.', 'info');
+  }
 }
 
 function guardarCarrito() {
@@ -126,11 +129,14 @@ vaciarCarritoBtn.addEventListener('click', () => {
 // -------------------- CHECKOUT --------------------
 
 comprarBtn.addEventListener('click', () => {
-  if (carrito.length === 0) {
+  const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
+  if (carrito.length === 0 || totalItems === 0) {
     Swal.fire('Tu carrito está vacío', '', 'warning');
     return;
   }
-  precargarFormulario(); // <--- Aquí la llamamos también
+
+  precargarFormulario();
   checkoutSection.classList.remove('oculto');
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 });
@@ -148,7 +154,10 @@ formCompra.addEventListener('submit', (e) => {
     return;
   }
 
-  const resumen = carrito.map(item => `${item.nombre} x${item.cantidad} = ${item.precio * item.cantidad} monedas`).join('\n');
+  const resumen = carrito.map(item =>
+    `${item.nombre} x${item.cantidad} = ${item.precio * item.cantidad} monedas`
+  ).join('\n');
+
   const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
 
   Swal.fire({
@@ -165,28 +174,24 @@ formCompra.addEventListener('submit', (e) => {
     icon: 'success'
   });
 
-  // Agregar skins al inventario (se asume inventario global accesible)
   carrito.forEach(item => {
     for (let i = 0; i < item.cantidad; i++) {
       inventario.push(item);
     }
   });
 
-  // Reset carrito e inventario persistente
   carrito = [];
   guardarCarrito();
   guardarInventario();
   actualizarCarrito();
   actualizarInventario();
 
-  // Limpio localStorage de los inputs del formulario
   inputs.forEach(input => localStorage.removeItem(input.id));
-
   formCompra.reset();
   checkoutSection.classList.add('oculto');
 });
 
-// -------------------- INICIALIZACIÓN --------------------
+// -------------------- INICIO --------------------
 
 window.addEventListener('DOMContentLoaded', () => {
   precargarFormulario();
