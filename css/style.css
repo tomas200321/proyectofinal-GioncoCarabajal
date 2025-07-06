@@ -1,0 +1,267 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #121212;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #444;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f0ad4e;
+  text-shadow: 1px 1px 3px #000;
+}
+
+main {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+footer {
+  margin-top: 40px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ---------- Botones ---------- */
+
+button {
+  padding: 8px 14px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#abrirCajaBtn {
+  padding: 15px 35px;
+  font-size: 1.3rem;
+  background-color: #28a745;
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.7);
+}
+
+#abrirCajaBtn:hover {
+  background-color: #1e7e34;
+  box-shadow: 0 0 20px rgba(30, 126, 52, 0.9);
+}
+
+/* ---------- Carrusel ---------- */
+
+#carrusel-container {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background-color: #1b1b1b;
+  border-radius: 12px;
+  border: 3px solid #f0ad4e;
+  box-shadow: 0 0 15px #f0ad4e;
+  position: relative;
+}
+
+.strip {
+  display: flex;
+  position: relative;
+  left: 0;
+  transition: left 3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.item {
+  flex-shrink: 0;
+  width: 130px;
+  text-align: center;
+  padding: 8px;
+  user-select: none;
+}
+
+.item img {
+  width: 100%;
+  border-radius: 10px;
+  border: 3px solid #444;
+}
+
+.item span {
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-shadow: 0 0 5px black;
+}
+
+/* ---------- Rarezas ---------- */
+
+.común img,
+.skin-card.común {
+  border-color: gray;
+}
+
+.raro img,
+.skin-card.raro {
+  border-color: #4eaaff;
+  box-shadow: 0 0 12px #4eaaff;
+}
+
+.épico img,
+.skin-card.épico {
+  border-color: #a246ff;
+  box-shadow: 0 0 15px #a246ff;
+}
+
+.legendario img,
+.skin-card.legendario {
+  border-color: #ffa200;
+  box-shadow: 0 0 18px #ffa200;
+}
+
+.rareza-común { color: gray; }
+.rareza-raro { color: #4eaaff; }
+.rareza-épico { color: #a246ff; }
+.rareza-legendario { color: #ffa200; }
+
+/* ---------- Resultado ---------- */
+
+#resultado {
+  background-color: #222;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  font-size: 1.4rem;
+  box-shadow: 0 0 15px #f0ad4e;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#resultado img {
+  margin-top: 20px;
+  width: 320px;
+  border-radius: 15px;
+  border: 4px solid #f0ad4e;
+  box-shadow: 0 0 20px #f0ad4e;
+}
+
+/* ---------- Inventario ---------- */
+
+#inventario {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#contenedor-inventario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skin-inventario {
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 5px;
+  width: 100px;
+  text-align: center;
+  background-color: #2a2a2a;
+}
+
+.skin-inventario img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* ---------- Tienda ---------- */
+
+.skin-card {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  background: #222;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.skin-card:hover {
+  transform: scale(1.05);
+}
+
+.skin-card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* ---------- Carrito ---------- */
+
+#carrito {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#lista-carrito {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+#lista-carrito li {
+  margin-bottom: 8px;
+  padding: 6px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* ---------- Checkout ---------- */
+
+#checkout {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#checkout form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#checkout input,
+#checkout select {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.oculto {
+  display: none;
+}

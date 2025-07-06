@@ -1,0 +1,44 @@
+[
+  {
+    "nombre": "AK-47 | Redline",
+    "rareza": "raro",
+    "img": "img/ak47redline.png",
+    "precio": 250
+  },
+  {
+    "nombre": "AWP | Asiimov",
+    "rareza": "épico",
+    "img": "img/awpasssimov.png",
+    "precio": 600
+  },
+  {
+    "nombre": "Glock-18 | Fade",
+    "rareza": "legendario",
+    "img": "img/glockfade.png",
+    "precio": 180
+  },
+  {
+    "nombre": "P250 | Sand Dune",
+    "rareza": "común",
+    "img": "img/p250sand.png",
+    "precio": 50
+  },
+  {
+    "nombre": "M4A4 | Howl",
+    "rareza": "legendario",
+    "img": "img/m4a4howl.png",
+    "precio": 800
+  },
+  {
+    "nombre": "USP-S | Kill Confirmed",
+    "rareza": "épico",
+    "img": "img/uspkill.png",
+    "precio": 120
+  },
+  {
+    "nombre": "MAC-10 | Candy Apple",
+    "rareza": "común",
+    "img": "img/mac10candy.png",
+    "precio": 250
+  }
+]

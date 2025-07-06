@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulador Apertura Cajas CS2</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <header>
+    <h1>🎮 Simulador Apertura Cajas CS2</h1>
+  </header>
+
+  <main>
+    <button id="abrirCajaBtn">Abrir Caja</button>
+
+    <section id="carrusel-container"></section>
+
+    <section id="resultado"></section>
+
+    <section id="inventario">
+      <h2>🎒 Inventario</h2>
+      <div id="contenedor-inventario"></div>
+    </section>
+
+    <section id="tienda">
+      <h2>Tienda de Skins</h2>
+      <div id="skins-tienda"></div>
+    </section>
+
+    <section id="carrito">
+      <h2>🛒 Carrito de Compra</h2>
+      <ul id="lista-carrito"></ul>
+      <p>Total: <span id="total">0</span> monedas</p>
+      <button id="vaciarCarritoBtn">Vaciar Carrito</button>
+      <button id="comprarBtn">Comprar</button>
+    </section>
+
+    <section id="checkout" class="oculto">
+      <h2>✅ Finalizar Compra</h2>
+      <form id="formularioCompra">
+        <input type="text" id="nombre" placeholder="Nombre completo" required />
+        <input type="email" id="email" placeholder="Correo electrónico" required />
+        <input type="text" id="steamUser" placeholder="Usuario de Steam para trade" required />
+        <select id="metodoPago" required>
+          <option value="">Seleccionar método de pago</option>
+          <option value="Tarjeta">Tarjeta de crédito</option>
+          <option value="PayPal">PayPal</option>
+          <option value="MercadoPago">Mercado Pago</option>
+        </select>
+        <button type="submit">Confirmar Compra</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Simulador no oficial de Counter-Strike 2</p>
+  </footer>
+
+  <!-- JS sin módulos, en orden de cascada -->
+  <script src="js/main.js"></script>
+  <script src="js/carrito.js"></script>
+</body>
+</html>
