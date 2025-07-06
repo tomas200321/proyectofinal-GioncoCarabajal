@@ -1,5 +1,3 @@
-// carrito.js
-
 const listaCarrito = document.getElementById('lista-carrito');
 const totalSpan = document.getElementById('total');
 const comprarBtn = document.getElementById('comprarBtn');
@@ -9,6 +7,7 @@ const formCompra = document.getElementById('formularioCompra');
 
 const MAX_CANTIDAD_POR_SKIN = 5;
 let carrito = [];
+let vaciadoPorCompraConfirmada = false;
 
 // Inputs del formulario
 const nombreInput = document.getElementById('nombre');
@@ -77,9 +76,12 @@ function actualizarCarrito() {
   totalSpan.textContent = total;
 
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
   if (totalItems === 0 && !checkoutSection.classList.contains('oculto')) {
     checkoutSection.classList.add('oculto');
-    Swal.fire('El carrito se vació', 'Se canceló el proceso de compra.', 'info');
+    if (!vaciadoPorCompraConfirmada) {
+      Swal.fire('El carrito se vació', 'Se canceló el proceso de compra.', 'info');
+    }
   }
 }
 
@@ -172,23 +174,27 @@ formCompra.addEventListener('submit', (e) => {
       <p><strong>Total:</strong> ${total} monedas</p>
     `,
     icon: 'success'
+  }).then(() => {
+    vaciadoPorCompraConfirmada = true;
+
+    carrito.forEach(item => {
+      for (let i = 0; i < item.cantidad; i++) {
+        inventario.push(item);
+      }
+    });
+
+    carrito = [];
+    guardarCarrito();
+    guardarInventario();
+    actualizarCarrito();
+    actualizarInventario();
+
+    inputs.forEach(input => localStorage.removeItem(input.id));
+    formCompra.reset();
+    checkoutSection.classList.add('oculto');
+
+    vaciadoPorCompraConfirmada = false;
   });
-
-  carrito.forEach(item => {
-    for (let i = 0; i < item.cantidad; i++) {
-      inventario.push(item);
-    }
-  });
-
-  carrito = [];
-  guardarCarrito();
-  guardarInventario();
-  actualizarCarrito();
-  actualizarInventario();
-
-  inputs.forEach(input => localStorage.removeItem(input.id));
-  formCompra.reset();
-  checkoutSection.classList.add('oculto');
 });
 
 // -------------------- INICIO --------------------
@@ -198,4 +204,3 @@ window.addEventListener('DOMContentLoaded', () => {
   cargarCarrito();
   actualizarCarrito();
 });
-
